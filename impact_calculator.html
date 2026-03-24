@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='UTF-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<title>Impact Slider Calculator</title>
+<style>
+ body { font-family: Arial, sans-serif; margin: 20px; }
+ h1 { color: #2b4b80; }
+ .category { margin-bottom: 20px; }
+ label { display: block; margin-top: 8px; }
+ select { padding: 6px; width: 200px; }
+ #result { font-size: 1.2em; margin-top: 20px; font-weight: bold; }
+ .container { max-width: 500px; }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Impact Slider Calculator</h1>
+<p>Select one tag for each category. The tool will compute the average and suggest the appropriate TheyDo impact slider value (-2 to +2).</p>
+
+<div class="category">
+<h3>Severity</h3>
+<i><b>Question:</b> How harmful or beneficial is this insight to the advisor, client, or business?</i><br>
+<select id="severity">
+  <option value="-2">Material Harm (-2)</option>
+  <option value="-1">Operational Friction (-1)</option>
+  <option value="0">Meets Expectations (0)</option>
+  <option value="1">Exceeds Expectations (+1)</option>
+  <option value="2">Advocacy Moment (+2)</option>
+</select>
+</div>
+
+<div class="category">
+<h3>Frequency</h3>
+<i><b>Question:</b> How often does this occur across cases/advisors?</i><br>
+<select id="frequency">
+  <option value="-2">Common / Recurring (-2)</option>
+  <option value="-1">Periodic (-1)</option>
+  <option value="0">Infrequent (0)</option>
+  <option value="1">Rare Positive (+1)</option>
+  <option value="2">Consistently Positive (+2)</option>
+</select>
+</div>
+
+<div class="category">
+<h3>Breadth</h3>
+<i><b>Question:</b> How many advisors/clients/segments are affected?</i><br>
+<select id="breadth">
+  <option value="-2">Wide Impact (-2)</option>
+  <option value="-1">Moderate Impact (-1)</option>
+  <option value="0">Limited Impact (0)</option>
+  <option value="1">Targeted Positive (+1)</option>
+  <option value="2">Broad Positive (+2)</option>
+</select>
+</div>
+
+<div class="category">
+<h3>Duration</h3>
+<i><b>Question:</b> How long does the impact last?</i><br>
+<select id="duration">
+  <option value="-2">Long-Term Negative (-2)</option>
+  <option value="-1">Short-Term Negative (-1)</option>
+  <option value="0">Neutral (0)</option>
+  <option value="1">Short-Term Positive (+1)</option>
+  <option value="2">Long-Term Positive (+2)</option>
+</select>
+</div>
+
+<button onclick="calculateImpact()">Calculate Impact Slider Value</button>
+
+<div id="result"></div>
+
+<script>
+function calculateImpact() {
+  const s = parseInt(document.getElementById('severity').value);
+  const f = parseInt(document.getElementById('frequency').value);
+  const b = parseInt(document.getElementById('breadth').value);
+  const d = parseInt(document.getElementById('duration').value);
+
+  const avg = (s + f + b + d) / 4;
+  const slider = Math.round(avg);
+
+  document.getElementById('result').innerHTML = 'Suggested TheyDo Impact Slider Value: ' + slider + ' (Avg: ' + avg.toFixed(2) + ')';
+}
+</script>
+</div>
+</body>
+</html>
